@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
+import { Divider, Image, Card } from 'semantic-ui-react';
 
 class PostList extends React.Component {
 
@@ -11,25 +12,27 @@ class PostList extends React.Component {
     console.log(this.props.posts);
     return this.props.posts.map(post => {
       return (
-        <div className="item">
-          <img className="large middle aligned" src={post.image} />
-          <div className="content">
-            <div className="description">
-              <h2>{post.label}</h2>
-              <p>{post.snippet}</p>
+          <Card>
+          <div className="item">
+            <Image className="middle aligned" size='small' src={post.image} />
+            <Divider hidden />
+            <div className="content">
+              <div className="description">
+                <h2>{post.label}</h2>
+                <p>{post.snippet}</p>
+              </div>
             </div>
           </div>
-        </div>
+          </Card>
       );
     });
   }
-
   render() {
     //console.log(this.props.posts);
     return (
-      <div className="ui relaxed divided list">
+      <Card.Group itemsPerRow={4}>
         {this.renderList()}
-      </div>
+      </Card.Group>
     );
   }
 }
