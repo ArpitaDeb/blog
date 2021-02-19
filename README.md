@@ -1,6 +1,8 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+##Desktop App
+![Illness](https://github.com/ArpitaDeb/blog/blob/main/docs/ilnessCondition.png?raw=true)
 
 ## Available Scripts
 
