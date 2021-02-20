@@ -1,39 +1,28 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPosts } from '../actions';
-import ReactImageFallback from "react-image-fallback";
 import { Divider, Image, Card } from 'semantic-ui-react';
 
 class PostList extends React.Component {
   state = {
     src: '',
-    fallbackSrc: `https://assets.your.md/conditions/lymphoedema/card/lymphoedema-female-card.jpg`,
-    loaded: false,
-    error: false
+    fallbackSrc: `https://assets.your.md/conditions/lymphoedema/card/lymphoedema-female-card.jpg`
   }
   componentDidMount() {
     this.props.fetchPosts();
-  }
-  onImageLoaded = () => {
-    this.setState({ loaded: true });
-  }
-  onImageError = () => {
-    this.setState({ error: true });
   }
   addDefaultSrc(ev) {
     ev.target.src = 'https://assets.your.md/conditions/lymphoedema/card/lymphoedema-female-card.jpg'
   }
   renderList() {
-    const { src, loaded, fallbackSrc, error } = this.state;
+    const { fallbackSrc } = this.state;
     console.log(this.props.posts);
     return this.props.posts.map(post => {
       let src = post.image;
-      //let imgSrc = (!error) ? src : fallbackSrc;
       return (
         <Card>
           <div className="item">
-            <Image className="middle aligned" size='small' src={imgSrc} onLoad={this.onImageLoaded} onError={this.onImageError} />
-            {src ? <Image className="middle aligned" size='small' src={post.image} onError={this.addDefaultSrc} /> : <Image className="middle aligned" size='small' src={fallbackSrc} onError={this.addDefaultSrc} />}
+            {src ? <Image className="middle aligned" size='small' src={post.image} onError={this.addDefaultSrc} /> : <Image className="middle aligned" size='small' src={fallbackSrc} />}
             <Divider hidden />
             <div className="content">
               <div className="description">
@@ -47,7 +36,6 @@ class PostList extends React.Component {
     });
   }
   render() {
-    //console.log(this.props.posts);
     return (
       <Card.Group itemsPerRow={4}>
         {this.renderList()}
